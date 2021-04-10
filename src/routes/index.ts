@@ -10,7 +10,9 @@ router.get('/', async (req: Request, res: Response) => {
     const { user } = req.session;
     const posts = await PostRepo.findAll();
     const message = await analyzePostTone(
-      posts.filter((post) => post.author.username === user.username),
+      posts.filter(
+        (post) => post.author.username === user.username && !post.isHateSpeech,
+      ),
     );
 
     res.render('user/index', {
