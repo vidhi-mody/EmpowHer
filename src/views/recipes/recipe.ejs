@@ -75,7 +75,7 @@
               >
               <div class="card-body">
                 <h1 class="card-title"><%- recipe.title %></h1>
-                <small class="text-right">Ready in <%- recipe.readyInMinutes %> mins</small>
+                <h3 class="card-title">Ready in <%- recipe.readyInMinutes %> mins</h3>
                 <p class="card-text"><%- recipe.summary %></p>
                 <% for (let i=0; i<recipe.dishTypes.length; i++ ) { %>
                   <span class="badge badge-pill badge-primary"><%- recipe.dishTypes[i] %></span>
@@ -90,12 +90,12 @@
                     <span class="badge badge-pill badge-warning">Heath Score: <%- recipe.healthScore %>/100</span>
                     <br>
                     <br>
-                    <h6 class="card-text">Ingredients:</h6>
+                    <h3 class="card-title">Ingredients:</h3>
                     <% for (let i=0; i<recipe.extendedIngredients.length; i++ ) { %>
-                      <p class="card-text"><%- recipe.extendedIngredients[i].originalName %></p>
+                      <p class="card-text"><%- i+1 %>. <%- recipe.extendedIngredients[i].originalName %></p>
                       <% } %>
                     <br>
-                    <h6 class="card-text">Instructions:</h6>
+                    <h3 class="card-title">Instructions:</h3>
                     <p class="card-text"><%- recipe.instructions %></p>
               </div>
             </div>

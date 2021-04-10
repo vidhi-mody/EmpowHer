@@ -25,7 +25,6 @@ router.get(
         `https://api.spoonacular.com/recipes/${req.params.id}/information?apiKey=${process.env.SPOONACULAR_API_KEY}`,
       )
       .then((response) => {
-        console.log(response);
         const recipe = response.data;
         res.render('recipes/recipe', { user: req?.session?.user, recipe });
       })
@@ -62,7 +61,6 @@ router.post(
         )
         .then((response) => {
           const recipes = response.data;
-          console.log(recipes);
           res.render('recipes/list', { user: req?.session?.user, recipes });
         });
     } catch (err) {
