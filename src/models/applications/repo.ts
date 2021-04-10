@@ -12,10 +12,12 @@ export const createOne = async (
   }
 };
 
-export const findOne = async (filter: any): Promise<ApplicationDocument[]> => {
+export const findOne = async (
+  filter: any,
+): Promise<ApplicationDocument | null> => {
   try {
-    const applications = await ApplicationModel.findOne(filter);
-    return applications;
+    const application = await ApplicationModel.findOne(filter);
+    return application;
   } catch (err) {
     throw err;
   }

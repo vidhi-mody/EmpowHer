@@ -4,7 +4,7 @@ import { ChatRoomDocument, UserDocument } from '../../types';
 export const updateOne = async (
   id: string,
   data: any,
-): Promise<ChatRoomDocument> => {
+): Promise<ChatRoomDocument | null> => {
   try {
     const room = await ChatRoomModel.findOneAndUpdate(data, { new: true });
     return room;
@@ -15,7 +15,7 @@ export const updateOne = async (
 
 export const findByIdAndPopulate = async (
   id: string,
-): Promise<ChatRoomDocument> => {
+): Promise<ChatRoomDocument | null> => {
   try {
     const room = await ChatRoomModel.findById(id).populate('messages');
     return room;

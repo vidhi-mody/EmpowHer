@@ -38,17 +38,18 @@ router.post('/new', async (req: Request, res: Response, next: NextFunction) => {
           : files.file[0];
 
         if (
+          fileType &&
           ['jpeg', 'jpg', 'png', 'gif'].indexOf(fileType.split('/')[1]) === -1
         ) {
           throw new Error('Unsupported file format');
         }
 
-        fileName = `${nanoid()}.${fileType.split('/')[1]}`;
+        fileName = fileType ? `${nanoid()}.${fileType.split('/')[1]}` : ``;
 
         const staticPath = path.resolve(
           path.join(process.cwd(), 'src', 'public', 'uploads', fileName),
         );
-        type = fileType;
+        type = fileType || ``;
 
         mv(filePath, staticPath, { mkdirp: true }, (err) => {
           if (err) {

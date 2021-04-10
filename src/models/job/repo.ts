@@ -19,7 +19,7 @@ export const findAll = async (filter: any): Promise<JobDocument[]> => {
   }
 };
 
-export const findOne = async (filter?: any): Promise<JobDocument> => {
+export const findOne = async (filter?: any): Promise<JobDocument | null> => {
   try {
     const job = await JobModel.findOne(filter).populate('applications');
     return job;
@@ -31,7 +31,7 @@ export const findOne = async (filter?: any): Promise<JobDocument> => {
 export const update = async (
   jobId: string,
   update: any,
-): Promise<JobDocument> => {
+): Promise<JobDocument | null> => {
   try {
     const job = await JobModel.findByIdAndUpdate(jobId, update);
     return job;

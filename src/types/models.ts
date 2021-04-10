@@ -23,6 +23,7 @@ export interface Post {
   caption: string;
   category: string;
   createdAt?: string;
+  isHateSpeech?: boolean;
 }
 
 export interface PostDocument extends Post, mongoose.Document {}

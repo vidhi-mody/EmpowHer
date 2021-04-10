@@ -91,6 +91,11 @@
               />
               <% } %>
               <div class="card-body">
+                <% if(post.isHateSpeech) { %>
+                  <div class="alert alert-danger" role="alert">
+                    <strong>Danger!</strong> This post is marked to contain hate speech/abusive content!
+                  </div>
+                <% } %>
                 <p class="card-text"><%= post.caption %></p>
                 <h5 class="card-title"><%= post.category %> by <i><%= post.author.username %></i></h5>
                 <button type="submit" class="btn btn-danger">
@@ -111,7 +116,7 @@
 
                 <div class="mt-3">
                   <form action="/comment/<%= post._id %>" method="post">
-                    <input type="text" name="comment" class="form-control form-control-muted" placeholder="Comment">
+                    <input type="text" name="comment" class="form-control form-control-muted" placeholder="Comment" <% if(post.isHateSpeech) { %>disabled<% } %>>
                   </form>
                 </div>
               </div>

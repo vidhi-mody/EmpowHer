@@ -30,6 +30,10 @@ const PostSchema = new mongoose.Schema(
       required: true,
       default: 'moment',
     },
+    isHateSpeech: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     timestamps: true,

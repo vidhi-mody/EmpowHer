@@ -1,10 +1,18 @@
+import Filter from 'bad-words';
 import { promises as fs } from 'fs';
 import path from 'path';
 import PostModel from './schema';
 import { Post, PostDocument, UserDocument } from '../../types';
 
+const filter = new Filter({ placeHolder: 'x' });
+
 export const createOne = async (data: Post): Promise<PostDocument> => {
   try {
+    if (data?.caption && filter.isProfane(data.caption)) {
+      data.caption = filter.clean(data.caption);
+      data.isHateSpeech = true;
+    }
+
     const post = await PostModel.create(data);
     return post;
   } catch (err) {
