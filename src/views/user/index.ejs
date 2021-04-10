@@ -26,6 +26,12 @@
     <link href="css/nucleo-svg.css" rel="stylesheet" />
     <!-- CSS Files -->
     <link href="css/argon.min.css" rel="stylesheet" />
+    <style>
+      .img-blur {
+        filter: blur(8px);
+        -webkit-filter: blur(8px);
+      }
+    </style>
   </head>
 
   <body class="login-page">
@@ -82,7 +88,7 @@
             <div class="card">
               <% if(post.staticUrl) { %>
               <img
-                class="card-img-top"
+                class="card-img-top <%= post.isHateSpeech ? `img-blur` : `` %>"
                 src="<%= post.staticUrl %>"
                 alt="Card image cap"
                 width="100%";
