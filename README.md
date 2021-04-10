@@ -23,7 +23,7 @@ NGOs on the platform. We aim to curate a platform where women can connect, share
 
 [![PR's Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)](https://github.com/vidhi-mody/Vihaan/pulls)
 ![PRs](https://img.shields.io/github/issues-pr-closed/vidhi-mody/Vihaan?color=pink)
-[![Issues](https://img.shields.io/github/issues-raw/und3fined-v01d/empower)](https://github.com/vidhi-mody/Vihaan/issues)
+[![Issues](https://img.shields.io/github/issues-raw/vidhi-mody/Vihaan)](https://github.com/vidhi-mody/Vihaan/issues)
 [![Contributors](https://img.shields.io/github/contributors/vidhi-mody/Vihaan)]()
 ![Languages](https://img.shields.io/github/languages/count/vidhi-mody/Vihaan)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
