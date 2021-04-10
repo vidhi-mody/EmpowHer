@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon.png" />
+    <link rel="icon" type="image/png" href="/img/favicon.png" />
+    <title>Empower</title>
+    <!--     Fonts and icons     -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700"
+      rel="stylesheet"
+    />
+    <link
+      href="https://use.fontawesome.com/releases/v5.0.6/css/all.css"
+      rel="stylesheet"
+    />
+    <!-- Nucleo Icons -->
+    <link href="/css/nucleo-icons.css" rel="stylesheet" />
+    <link href="/css/nucleo-svg.css" rel="stylesheet" />
+    <!-- Font Awesome Icons -->
+    <link href="/css/font-awesome.css" rel="stylesheet" />
+    <link href="/css/nucleo-svg.css" rel="stylesheet" />
+    <!-- CSS Files -->
+    <link href="/css/argon.min.css" rel="stylesheet" />
+  </head>
+
+  <body class="login-page">
+    <!-- Navbar -->
+    <%- include("../shared/sidebar.ejs") -%>
+    <!-- End Navbar -->
+    <!-- Main content -->
+    <div class="main-content" id="panel">
+      <!-- Topnav -->
+      <%- include("../shared/topnav") -%>
+      <!-- Header -->
+      <!-- Header -->
+      <div class="header bg-primary pb-6">
+        <div class="container-fluid">
+          <div class="header-body">
+            <div class="row align-items-center py-4">
+              <div class="col-lg-6 col-7">
+                <h6 class="h2 text-white d-inline-block mb-0">View Meets</h6>
+                <nav
+                  aria-label="breadcrumb"
+                  class="d-none d-md-inline-block ml-md-4"
+                >
+                  <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                    <li class="breadcrumb-item">
+                      <a href="/"><i class="fas fa-home"></i></a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">
+                      MeetUps
+                    </li>
+                  </ol>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Page content -->
+
+      <div class="container-fluid mt--6">
+        <div class="row">
+          <!-- Meets -->
+          <% for(const meet of meets) { %>
+            <% if(meet.eventDate > Date.now()) { %>
+              <div class="col-md-6" data-id="<%= meet._id %>" id="meet-<%= meet._id %>">
+                <div class="card" style="width: 100%">
+                  <div class="card-body">
+                    <h2 class="card-title"><%= meet.eventName %></h2>
+                    <p><i class="ni ni-bulb-61"></i>&nbsp;&nbsp;<%= meet.eventDescription %></p>
+                    <p class="card-text"><i class="ni ni-tag"></i>&nbsp;&nbsp;<a href="<%= meet.eventLink %>"><%= meet.eventLink %></a></p>
+                    <p class="card-text"><i class="ni ni-calendar-grid-58"></i>&nbsp;&nbsp;<%= meet.eventDate %></p>
+                    <p class="card-text"><i class="ni ni-time-alarm"></i>&nbsp;&nbsp;<%= meet.eventTime %></p>
+                    
+                    <button type="submit" class="btn btn-dark" onclick="rsvp(this)">
+                      <span class="btn-inner--icon"></span>
+                        <i class="ni ni-check-bold"></i
+                      ></span>
+                      <span class="btn-inner--text">RSVP</span>
+                    </button>
+
+                    <% if(meet.author.username === user.username) { %>
+                    <button type="submit" class="btn btn-secondary" onclick="removeMeet(this, '<%= meet._id %>')">
+                      <span class="btn-inner--icon"
+                        ><i class="ni ni-fat-remove"></i
+                      ></span>
+                      <span class="btn-inner--text">Remove</span>
+                    </button>
+                    <% } %>
+
+                  </div>
+                </div>
+              </div>
+            <% } %>
+          <% } %>
+          <!-- Meets -->
+        </div>
+      </div>
+    </div>
+    <!--   Core JS Files   -->
+    <%- include("../shared/scripts") -%>
+    <!-- Delete Meet -->
+    <script type="text/javascript">
+      function removeMeet(elem, id) {
+        fetch(`/meet/delete/${id}`, {
+          method: "post",
+        }).then(response => {
+          $(`#meet-${id}`).remove();
+          $.notify("Post deleted successfully!", {
+            autoHide: true,
+            autoHideDelay: 5000,
+            globalPosition: "bottom center",
+            style: "bootstrap",
+            className: "success"
+          });
+        }).catch(err => {
+          console.log(err);
+        });
+      }
+
+      function rsvp(elem) {
+        $.notify("You're in!", {
+                    autoHide: true,
+                    autoHideDelay: 5000,
+                    globalPosition: "bottom center",
+                    style: "bootstrap",
+                    className: "success"
+                  });
+                  elem.remove();
+              }
+    </script>
+  </body>
+</html>
+
