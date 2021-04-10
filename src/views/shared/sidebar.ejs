@@ -1,0 +1,66 @@
+<nav
+  class="sidenav navbar navbar-vertical fixed-left navbar-expand-xs navbar-light bg-white"
+  id="sidenav-main"
+>
+  <div class="scrollbar-inner">
+    <!-- Brand -->
+    <div class="sidenav-header align-items-center">
+      <a class="navbar-brand" href="javascript:void(0)">
+        <img src="/img/brand/empower.png" class="navbar-brand-img" alt="..." />
+      </a>
+    </div>
+    <div class="navbar-inner">
+      <!-- Collapse -->
+      <div class="collapse navbar-collapse" id="sidenav-collapse-main">
+        <!-- Nav items -->
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" href="/">
+              <i class="ni ni-tv-2 text-primary"></i>
+              <span class="nav-link-text">Home</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/post/new">
+              <i class="ni ni-bullet-list-67 text-default"></i>
+              <span class="nav-link-text">New Post</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/chat">
+              <i class="ni ni-send text-dark"></i>
+              <span class="nav-link-text">Messages</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/auth/logout">
+              <i class="ni ni-key-25 text-info"></i>
+              <span class="nav-link-text">Logout</span>
+            </a>
+          </li>
+        </ul>
+        <!-- Divider -->
+        <hr class="my-3" />
+       <h6 class="navbar-heading p-0 text-muted">
+          <span class="docs-normal">Jobs</span>
+        </h6>
+        <ul class="navbar-nav mb-md-3">
+          <li class="nav-item">
+            <a class="nav-link" href="/job">
+              <i class="ni ni-building"></i>
+              <span class="nav-link-text">View All</span>
+            </a>
+          </li>
+          <% if(user.isAdmin) { %>
+          <li class="nav-item">
+            <a class="nav-link" href="/job/create">
+              <i class="ni ni-briefcase-24"></i>
+              <span class="nav-link-text">Post Job</span>
+            </a>
+          </li>
+          <% } %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon.png" />
+    <link rel="icon" type="image/png" href="/img/favicon.png" />
+    <title>Empower</title>
+    <!--     Fonts and icons     -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700"
+      rel="stylesheet"
+    />
+    <link
+      href="https://use.fontawesome.com/releases/v5.0.6/css/all.css"
+      rel="stylesheet"
+    />
+    <!-- Nucleo Icons -->
+    <link href="/css/nucleo-icons.css" rel="stylesheet" />
+    <link href="/css/nucleo-svg.css" rel="stylesheet" />
+    <!-- Font Awesome Icons -->
+    <link href="/css/font-awesome.css" rel="stylesheet" />
+    <link href="/css/nucleo-svg.css" rel="stylesheet" />
+    <!-- CSS Files -->
+    <link href="/css/argon.min.css" rel="stylesheet" />
+  </head>
+
+  <body class="login-page">
+    <!-- Navbar -->
+    <%- include("../shared/sidebar.ejs") -%>
+    <!-- End Navbar -->
+    <!-- Main content -->
+    <div class="main-content" id="panel">
+      <!-- Topnav -->
+      <%- include("../shared/topnav.ejs") -%>
+      <!-- Header -->
+      <!-- Header -->
+      <div class="header bg-primary pb-6">
+        <div class="container-fluid">
+          <div class="header-body">
+            <div class="row align-items-center py-4">
+              <div class="col-lg-6 col-7">
+                <h6 class="h2 text-white d-inline-block mb-0">
+                  Details for <%= job.role %> position at <%= job.company.name
+                  %>
+                </h6>
+                <nav
+                  aria-label="breadcrumb"
+                  class="d-none d-md-inline-block ml-md-4"
+                >
+                  <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                    <li class="breadcrumb-item">
+                      <a href="/"><i class="fas fa-home"></i></a>
+                    </li>
+                    <li class="breadcrumb-item"><a href="#">Job</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">
+                      Detail
+                    </li>
+                  </ol>
+                </nav>
+              </div>
+              <div class="col-12">
+                <div class="card">
+              <!-- Card header -->
+                  <div class="card-header text-center">
+                    <h3 class="mb-0">Screen resumes</h3>
+                  </div>
+                  <!-- Card body -->
+                  <div class="card-body text-center">
+                    <form>
+                      <label class="custom-toggle custom-toggle-default">
+                        <input type="checkbox" checked="">
+                        <span class="custom-toggle-slider rounded-circle" data-label-off="No" data-label-on="Yes"></span>
+                      </label>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Page content -->
+
+      <div class="container-fluid mt-3">
+        <div class="row">
+          <% for(const application of applications) { %>
+          <div class="col-xl-12 order-xl-2">
+            <div class="card card-profile">
+              <div class="row justify-content-center">
+                <div class="col-lg-3 order-lg-2">
+                  <div class="card-profile-image">
+                    <a href="/user/<%= application.by.username %>">
+                      <img
+                        src="<%= application.by.profilePicture %>"
+                        class="rounded-circle"
+                      />
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4"
+              >
+                <div class="d-flex justify-content-between">
+                  <a
+                    href="<%= application.resume %>"
+                    class="btn btn-sm btn-info mr-4"
+                    download
+                    >Resume</a
+                  >
+                  <a
+                    href="/chat/<%= application.by.username %>"
+                    class="btn btn-sm btn-default float-right"
+                    >Message</a
+                  >
+                </div>
+              </div>
+              <div class="card-body pt-0">
+                <div class="row">
+                  <div class="col">
+                    <div class="card-profile-stats justify-content-center">
+                      <% for(const response of application.responses) { %>
+                      <div>
+                        <span class="heading"><%= response.question %></span>
+                        <span class="description"><%= response.answer %></span>
+                      </div>
+                      <% } %>
+                    </div>
+                  </div>
+                </div>
+                <div class="text-center">
+                  <!-- Button trigger modal -->
+                  <button
+                    type="button"
+                    class="btn btn-danger"
+                    data-toggle="modal"
+                    data-target="#insights-<%= application.by._id %>"
+                  >
+                    View Insights
+                  </button>
+                  <!-- Modal -->
+                  <div
+                    class="modal fade"
+                    id="insights-<%= application.by._id %>"
+                    tabindex="-1"
+                    role="dialog"
+                    aria-labelledby="label-<%= application.by._id %>"
+                    aria-hidden="true"
+                  >
+                    <div
+                      class="modal-dialog modal-dialog-centered"
+                      role="document"
+                    >
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5
+                            class="modal-title"
+                            id="label-<%= application.by._id %>"
+                          >
+                            Tone and Personality Insights
+                          </h5>
+                          <button
+                            type="button"
+                            class="close"
+                            data-dismiss="modal"
+                            aria-label="Close"
+                          >
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body overflow-auto">
+                          <h6>Emotional Tone</h6>
+                          <div class="table-responsive">
+                            <div>
+                              <table class="table align-items-center">
+                                <thead class="thead-light">
+                                  <tr>
+                                    <th scope="col">Response #</th>
+                                    <th scope="col">Anger</th>
+                                    <th scope="col">Disgust</th>
+                                    <th scope="col">Fear</th>
+                                    <th scope="col">Joy</th>
+                                    <th scope="col">Sadness</th>
+                                  </tr>
+                                </thead>
+                                <tbody class="list">
+                                  <tr>
+                                    <th scope="row">Response 1</th>
+                                    <% for(const tone of
+                                    application.responses[0].insights[0].tones)
+                                    { %>
+                                    <td><%= tone.score %></td>
+                                    <% } %>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row">Response 2</th>
+                                    <% for(const tone of
+                                    application.responses[1].insights[0].tones)
+                                    { %>
+                                    <td><%= tone.score %></td>
+                                    <% } %>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row">Response 3</th>
+                                    <% for(const tone of
+                                    application.responses[2].insights[0].tones)
+                                    { %>
+                                    <td><%= tone.score %></td>
+                                    <% } %>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                          <h6>Language Tone</h6>
+                          <div class="table-responsive">
+                            <div>
+                              <table class="table align-items-center">
+                                <thead class="thead-light">
+                                  <tr>
+                                    <th scope="col">Response #</th>
+                                    <th scope="col">Analytical</th>
+                                    <th scope="col">Confident</th>
+                                    <th scope="col">Tentative</th>
+                                  </tr>
+                                </thead>
+                                <tbody class="list">
+                                  <tr>
+                                    <th scope="row">Response 1</th>
+                                    <% for(const tone of
+                                    application.responses[0].insights[1].tones)
+                                    { %>
+                                    <td><%= tone.score %></td>
+                                    <% } %>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row">Response 2</th>
+                                    <% for(const tone of
+                                    application.responses[1].insights[1].tones)
+                                    { %>
+                                    <td><%= tone.score %></td>
+                                    <% } %>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row">Response 3</th>
+                                    <% for(const tone of
+                                    application.responses[2].insights[1].tones)
+                                    { %>
+                                    <td><%= tone.score %></td>
+                                    <% } %>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                          <h6>Social Tone</h6>
+                          <div class="table-responsive">
+                            <div>
+                              <table class="table align-items-center">
+                                <thead class="thead-light">
+                                  <tr>
+                                    <th scope="col">Response #</th>
+                                    <th scope="col">Openness</th>
+                                    <th scope="col">Conscientiousness</th>
+                                    <th scope="col">Extraversion</th>
+                                    <th scope="col">Agreeableness</th>
+                                    <th scope="col">Emotional Range</th>
+                                  </tr>
+                                </thead>
+                                <tbody class="list">
+                                  <tr>
+                                    <th scope="row">Response 1</th>
+                                    <% for(const tone of
+                                    application.responses[0].insights[2].tones)
+                                    { %>
+                                    <td><%= tone.score %></td>
+                                    <% } %>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row">Response 2</th>
+                                    <% for(const tone of
+                                    application.responses[1].insights[2].tones)
+                                    { %>
+                                    <td><%= tone.score %></td>
+                                    <% } %>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row">Response 3</th>
+                                    <% for(const tone of
+                                    application.responses[2].insights[2].tones)
+                                    { %>
+                                    <td><%= tone.score %></td>
+                                    <% } %>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button
+                            type="button"
+                            class="btn btn-secondary"
+                            data-dismiss="modal"
+                          >
+                            Close
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <% } %>
+        </div>
+      </div>
+    </div>
+    <!--   Core JS Files   -->
+    <%- include("../shared/scripts") -%>
+    <!--   Plugins -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.bundle.min.js"
+      integrity="sha512-SuxO9djzjML6b9w9/I07IWnLnQhgyYVSpHZx0JV97kGBfTIsUYlWflyuW4ypnvhBrslz1yJ3R+S14fdCWmSmSA=="
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

@@ -1,0 +1,17 @@
+export default [
+  'Tell me something about yourself in brief',
+  'What are your strengths and weaknesses?',
+  'Describe who you are? or Tell me about your background.',
+  'What is your greatest fear?',
+  'What do your friends/co-workers say about you?',
+  'What did you do in the last year to improve your knowledge?',
+  'What is your ideal company or workplace?',
+  'What is the most difficult thing that you’ve ever accomplished? or What is the most difficult thing you have ever done?',
+  'How quickly do you adapt to new technology?',
+  'What are your hobbies? or What are you passionate about?',
+  'How do you respond to change?',
+  'Are you an organized person?',
+  'Are you reliable? or Can I trust you with responsibilities?',
+  'Give me an example of your creativity.',
+  'Are you willing to relocate or travel?',
+];

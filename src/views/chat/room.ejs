@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon.png" />
+    <link rel="icon" type="image/png" href="/img/favicon.png" />
+    <title>Empower</title>
+    <!--     Fonts and icons     -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700"
+      rel="stylesheet"
+    />
+    <link
+      href="https://use.fontawesome.com/releases/v5.0.6/css/all.css"
+      rel="stylesheet"
+    />
+    <!-- Nucleo Icons -->
+    <link href="/css/nucleo-icons.css" rel="stylesheet" />
+    <link href="/css/nucleo-svg.css" rel="stylesheet" />
+    <!-- Font Awesome Icons -->
+    <link href="/css/font-awesome.css" rel="stylesheet" />
+    <link href="/css/nucleo-svg.css" rel="stylesheet" />
+    <!-- CSS Files -->
+    <link href="/css/argon.min.css" rel="stylesheet" />
+    <style>
+      #msgWindow {
+        margin-top: 20px;
+      }
+
+      #msgs {
+        margin: 0px 25px;
+        min-height: 200px;
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: flex-end;
+        align-items: flex-start;
+      }
+
+      .msg {
+        margin: 5px 0;
+        border: 1px solid silver;
+        padding: 3px 7px;
+        display: inline-block;
+        position: relative;
+        border-radius: 10px;
+      }
+      .msg::before,
+      .msg::after {
+        content: '';
+        display: inline-block;
+        bottom: 0;
+        position: absolute;
+        border: 1px solid silver;
+      }
+      .msg::before {
+        right: -20px;
+        width: 15px;
+        height: 15px;
+        border-radius: 10px;
+      }
+      .msg::after {
+        right: -35px;
+        width: 10px;
+        height: 10px;
+        border-radius: 5px;
+      }
+      .msg.from {
+        align-self: flex-end;
+      }
+      .msg.to {
+        align-self: flex-start;
+      }
+      .msg.to::before {
+        right: inherit;
+        left: -20px;
+      }
+      .msg.to::after {
+        right: inherit;
+        left: -35px;
+      }
+      .msg.typing {
+        color: silver;
+      }
+
+      #msgForm input:focus,
+      #msgForm button:focus {
+        box-shadow: none;
+      }
+    </style>
+  </head>
+
+  <body class="login-page">
+    <!-- Navbar -->
+    <%- include("../shared/sidebar.ejs") -%>
+    <!-- End Navbar -->
+    <!-- Main content -->
+    <div class="main-content" id="panel">
+      <!-- Topnav -->
+      <%- include("../shared/topnav.ejs") -%>
+      <!-- Header -->
+      <!-- Header -->
+      <div class="header bg-primary pb-6">
+        <div class="container-fluid">
+          <div class="header-body">
+            <div class="row align-items-center py-4">
+              <div class="col-lg-6 col-7">
+                <h6 class="h2 text-white d-inline-block mb-0">Messages</h6>
+                <nav
+                  aria-label="breadcrumb"
+                  class="d-none d-md-inline-block ml-md-4"
+                >
+                  <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                    <li class="breadcrumb-item">
+                      <a href="/"><i class="fas fa-home"></i></a>
+                    </li>
+                    <li class="breadcrumb-item"><a href="#">Messages</a></li>
+                  </ol>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Page content -->
+      <div class="container">
+        <div class="row">
+          <div class="col msg-window-container">
+            <div class="card" id="msgWindow">
+              <div class="card-header">
+                <span class="card-title"><%= receiver.name %></span>
+              </div>
+              <div class="card-body" id="msgs">
+                <% for(message of room.messages) { %>
+                <div
+                  class="msg <%= message.by.username === user.username ? 'from' : 'to' %>"
+                >
+                  <%= message.text %>
+                </div>
+                <% } %>
+              </div>
+              <div class="card-footer">
+                <div
+                  class="input-group"
+                  id="msgForm"
+                  data-sender="<%= user.username %>"
+                >
+                  <input
+                    class="form-control"
+                    type="text"
+                    placeholder="Type message and hit [Enter] to send."
+                  />
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button">
+                      Send
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--   Core JS Files   -->
+    <%- include("../shared/scripts") -%>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.dev.js"
+      integrity="sha256-OgiHfllOBEOiWQ2OcBsDncRG2k7QBW9Rs1dB7MH2N2s="
+      crossorigin="anonymous"
+    ></script>
+    <script type="text/javascript">
+      const socket = io();
+
+      const form = $('#msgForm');
+      const newMessage = form.find('input');
+      const sendButton = form.find('button');
+      const feed = $('#msgs');
+      const username = form.data('sender');
+
+      newMessage.on('keypress', function (e) {
+        if (e.which === 13 && newMessage.val()) {
+          e.stopPropagation();
+          e.preventDefault();
+
+          const theEnvelope = {
+            text: newMessage.val(),
+          };
+
+          socket.emit('message', theEnvelope);
+          newMessage.val('');
+        }
+      });
+
+      sendButton.on('click', function (e) {
+        if (newMessage.val()) {
+          e.stopPropagation();
+          e.preventDefault();
+          let theEnvelope = {
+            text: newMessage.val()
+          };
+          socket.emit('message', theEnvelope);
+          newMessage.val('');
+        }
+      });
+
+      socket.on('new message', function (data) {
+        addMessage(data);
+      });
+
+      function addMessage(data) {
+        let message = $('<div class="msg"></div>');
+        message.text(data.text);
+
+        if (data.by === username) {
+          message.addClass('from');
+        } else {
+          message.addClass('to');
+        }
+        message.appendTo(feed);
+      }
+    </script>
+  </body>
+</html>

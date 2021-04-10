@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon.png" />
+    <link rel="icon" type="image/png" href="/img/favicon.png" />
+    <title>Empower</title>
+    <!--     Fonts and icons     -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700"
+      rel="stylesheet"
+    />
+    <link
+      href="https://use.fontawesome.com/releases/v5.0.6/css/all.css"
+      rel="stylesheet"
+    />
+    <!-- Nucleo Icons -->
+    <link href="/css/nucleo-icons.css" rel="stylesheet" />
+    <link href="/css/nucleo-svg.css" rel="stylesheet" />
+    <!-- Font Awesome Icons -->
+    <link href="/css/font-awesome.css" rel="stylesheet" />
+    <link href="/css/nucleo-svg.css" rel="stylesheet" />
+    <!-- CSS Files -->
+    <link href="/css/argon.min.css" rel="stylesheet" />
+  </head>
+
+  <body class="login-page">
+    <!-- Navbar -->
+    <%- include("../shared/sidebar.ejs") -%>
+    <!-- End Navbar -->
+    <!-- Main content -->
+    <div class="main-content" id="panel">
+      <!-- Topnav -->
+      <%- include("../shared/topnav.ejs") -%>
+      <!-- Header -->
+      <!-- Header -->
+      <div class="header bg-primary pb-6">
+        <div class="container-fluid">
+          <div class="header-body">
+            <div class="row align-items-center py-4">
+              <div class="col-lg-6 col-7">
+                <h6 class="h2 text-white d-inline-block mb-0">
+                  Application for <%= job.role %> at <%= job.company.name %>
+                </h6>
+                <nav
+                  aria-label="breadcrumb"
+                  class="d-none d-md-inline-block ml-md-4"
+                >
+                  <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                    <li class="breadcrumb-item">
+                      <a href="/"><i class="fas fa-home"></i></a>
+                    </li>
+                    <li class="breadcrumb-item"><a href="#">Job</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">
+                      Apply
+                    </li>
+                  </ol>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Page content -->
+
+      <div class="container-fluid mt--6">
+        <div class="row">
+          <div class="col-xl py-4 bg-secondary">
+            <form action="/job/apply/<%= job._id %>" method="post">
+              <h5>Basic Details</h5>
+              <div class="form-group">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="name">Name</span>
+                  </div>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="name"
+                    placeholder="Full name"
+                    aria-label="Full name"
+                    aria-describedby="name"
+                  />
+                </div>
+              </div>
+
+              <!-- Email -->
+              <div class="form-group">
+                <div class="input-group">
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="email"
+                    placeholder="Email"
+                    aria-label="Email"
+                    aria-describedby="email"
+                  />
+                  <div class="input-group-append">
+                    <span class="input-group-text" id="email"
+                      >@example.com</span
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <!-- Phone -->
+              <div class="form-group">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="number">+91</span>
+                  </div>
+                  <input
+                    type="tel"
+                    class="form-control"
+                    name="phone"
+                    placeholder="Phone"
+                    aria-label="Phone"
+                  />
+                </div>
+              </div>
+
+              <!-- Summary -->
+              <div class="form-group">
+                <div class="input-group">
+                  <textarea
+                    class="form-control"
+                    name="summary"
+                    placeholder="Bio"
+                  ></textarea>
+                </div>
+              </div>
+
+              <h5>Location Details</h5>
+              <div class="form-group">
+                <div class="input-group">
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="address"
+                    placeholder="Address"
+                    aria-label="Address"
+                  />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="input-group">
+                  <input
+                    type="text"
+                    aria-label="City"
+                    class="form-control"
+                    name="city"
+                    placeholder="City"
+                    required="true"
+                  />
+                  <input
+                    type="text"
+                    aria-label="Region"
+                    class="form-control"
+                    name="region"
+                    placeholder="Region"
+                    required="true"
+                  />
+                  <input
+                    type="text"
+                    aria-label="Postal Code"
+                    class="form-control"
+                    name="postalCode"
+                    placeholder="Postal Code"
+                    required="true"
+                  />
+                  <input
+                    type="text"
+                    aria-label="Country Code"
+                    class="form-control"
+                    name="countryCode"
+                    placeholder="Country Code"
+                    required="true"
+                  />
+                </div>
+              </div>
+
+              <!-- Work -->
+              <h5>Work details</h5>
+              <div class="form-group">
+                <button
+                  type="button"
+                  class="mx-auto btn btn-info btn-sm"
+                  onclick="addWork(event)"
+                >
+                  +
+                </button>
+              </div>
+
+              <!-- Education -->
+              <h5>Education details</h5>
+              <div class="form-group">
+                <button
+                  type="button"
+                  class="mx-auto btn btn-info btn-sm"
+                  onclick="addEducation(event)"
+                >
+                  +
+                </button>
+              </div>
+
+              <!-- Skills -->
+              <h5>Skills</h5>
+              <div class="form-group">
+                <button
+                  type="button"
+                  class="mx-auto btn btn-info btn-sm"
+                  onclick="addSkills(event)"
+                >
+                  +
+                </button>
+              </div>
+
+              <!-- Questions -->
+              <p>
+                Questions below are meant to test your communication skills.
+                Please carefully answer each of these questions with minimum of 120 and maximum of 350 characters
+              </p>
+
+              <% for(let i=0; i<questions.length; i++) { %>
+                <h5><em><%= `Q${i+1} ${questions[i]}` %></em></h5>
+                <div class="form-group">
+                  <div class="input-group">
+                    <input class="form-control" 
+                      type="hidden"
+                      name="questions"
+                      value="<%= questions[i] %>"
+                    />
+                    <textarea
+                      maxlength="350" minlength="120"
+                      class="form-control"
+                      name="answers"
+                      placeholder="Your answer"
+                      required
+                    ></textarea>
+                  </div>
+                </div>
+              <% } %>
+
+              <div class="mt-2">
+                <button type="submit" class="btn btn-outline-primary btn-lg">
+                  Submit
+                </button>
+                <button type="reset" class="btn btn-outline-warning btn-lg">
+                  Clear
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--   Core JS Files   -->
+    <%- include("../shared/scripts") -%>
+    <script type="text/javascript">
+      var work = 0;
+      var education = 0;
+      var skills = 0;
+
+      function addSkills(event) {
+        skills++;
+
+        const target = event.target;
+        target.insertAdjacentHTML(
+          'beforebegin',
+          `<div id="skills-${skills}">
+            <div class="form-group">
+                <div class="input-group">
+                  <input
+                    type="text"
+                    aria-label="Skill name"
+                    class="form-control"
+                    name="skillName"
+                    placeholder="Skill name"
+                    required="true"
+                  />
+                  <select
+                    aria-label="Profiency"
+                    class="form-control"
+                    name="level"
+                    required="true"
+                  >
+                    <option>Master</option>
+                    <option>Intermediate</option>
+                    <option>Beginner</option>
+                  </select>
+                  <input
+                    type="text"
+                    aria-label="Keywords"
+                    class="form-control"
+                    name="keywords"
+                    placeholder="Keywords (comma seperated)"
+                    required="true"
+                  />
+                </div>
+            </div>
+            <div class="form-group">
+                <button
+                  type="button"
+                  class="mx-auto btn btn-warning btn-sm"
+                  data-id="skills-${skills}"
+                  onclick="removeElement(event)"
+                >
+                  -
+                </button>
+            </div>
+        </div>`,
+        );
+      }
+
+      function addEducation(event) {
+        education++;
+
+        const target = event.target;
+        target.insertAdjacentHTML(
+          'beforebegin',
+          `<div id="education-${education}">
+            <div class="form-group">
+                <div class="input-group">
+                  <input
+                    type="text"
+                    aria-label="Institution"
+                    class="form-control"
+                    name="institution"
+                    placeholder="Institution"
+                    required="true"
+                  />
+                  <input
+                    type="text"
+                    aria-label="Area"
+                    class="form-control"
+                    name="area"
+                    placeholder="Area"
+                    required="true"
+                  />
+                  <input
+                    type="text"
+                    aria-label="Degree"
+                    class="form-control"
+                    name="studyType"
+                    placeholder="Degree"
+                    required="true"
+                  />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">Start and End Date</span>
+                  </div>
+                  <input
+                    type="date"
+                    aria-label="Start Date"
+                    class="form-control"
+                    name="studyStartDate"
+                    required="true"
+                  />
+                  <input
+                    type="date"
+                    aria-label="End Date"
+                    class="form-control"
+                    name="studyEndDate"
+                  />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                  <input
+                    type="number"
+                    aria-label="GPA"
+                    class="form-control"
+                    name="gpa"
+                    placeholder="GPA"
+                    step="0.01"
+                    required="true"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                  <textarea
+                    type="text"
+                    aria-label="Courses"
+                    class="form-control"
+                    name="courses"
+                    placeholder="Courses (one on each line)"
+                    required="true"
+                  ></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <button
+                  type="button"
+                  class="mx-auto btn btn-warning btn-sm"
+                  data-id="education-${education}"
+                  onclick="removeElement(event)"
+                >
+                  -
+                </button>
+            </div>
+        </div>`,
+        );
+      }
+
+      function addWork(event) {
+        work++;
+
+        const target = event.target;
+        target.insertAdjacentHTML(
+          'beforebegin',
+          `<div id="work-${work}">
+            <div class="form-group">
+                <div class="input-group">
+                  <input
+                    type="text"
+                    aria-label="Company"
+                    class="form-control"
+                    name="company"
+                    placeholder="Company Name"
+                    required="true"
+                  />
+                  <input
+                    type="text"
+                    aria-label="Position"
+                    class="form-control"
+                    name="position"
+                    placeholder="Position"
+                    required="true"
+                  />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">Start and End Date</span>
+                  </div>
+                  <input
+                    type="date"
+                    aria-label="Start Date"
+                    class="form-control"
+                    name="startDate"
+                    required="true"
+                  />
+                  <input
+                    type="date"
+                    aria-label="End Date"
+                    class="form-control"
+                    name="endDate"
+                  />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                  <textarea
+                    type="text"
+                    aria-label="Summary"
+                    class="form-control"
+                    name="workSummary"
+                    placeholder="Summary"
+                    required="true"
+                  ></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                  <textarea
+                    type="text"
+                    aria-label="Highlights"
+                    class="form-control"
+                    name="highlights"
+                    placeholder="Highlights"
+                    required="true"
+                  ></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <button
+                  type="button"
+                  class="mx-auto btn btn-warning btn-sm"
+                  data-id="work-${work}"
+                  onclick="removeElement(event)"
+                >
+                  -
+                </button>
+            </div>
+        </div>`,
+        );
+      }
+
+      function removeElement(event) {
+        const elementToRemoveID = event.target.getAttribute('data-id');
+        document.getElementById(elementToRemoveID).remove();
+      }
+    </script>
+  </body>
+</html>

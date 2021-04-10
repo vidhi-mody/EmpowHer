@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon.png" />
+    <link rel="icon" type="image/png" href="/img/favicon.png" />
+    <title>Empower</title>
+    <!--     Fonts and icons     -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700"
+      rel="stylesheet"
+    />
+    <link
+      href="https://use.fontawesome.com/releases/v5.0.6/css/all.css"
+      rel="stylesheet"
+    />
+    <!-- Nucleo Icons -->
+    <link href="/css/nucleo-icons.css" rel="stylesheet" />
+    <link href="/css/nucleo-svg.css" rel="stylesheet" />
+    <!-- Font Awesome Icons -->
+    <link href="/css/font-awesome.css" rel="stylesheet" />
+    <link href="/css/nucleo-svg.css" rel="stylesheet" />
+    <!-- CSS Files -->
+    <link href="/css/argon.min.css" rel="stylesheet" />
+  </head>
+
+  <body class="login-page">
+    <!-- Navbar -->
+    <%- include("../shared/sidebar.ejs") -%>
+    <!-- End Navbar -->
+    <!-- Main content -->
+    <div class="main-content" id="panel">
+      <!-- Topnav -->
+      <%- include("../shared/topnav.ejs") -%>
+      <!-- Header -->
+      <!-- Header -->
+      <div class="header bg-primary pb-6">
+        <div class="container-fluid">
+          <div class="header-body">
+            <div class="row align-items-center py-4">
+              <div class="col-lg-6 col-7">
+                <h6 class="h2 text-white d-inline-block mb-0">All Jobs</h6>
+                <nav
+                  aria-label="breadcrumb"
+                  class="d-none d-md-inline-block ml-md-4"
+                >
+                  <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                    <li class="breadcrumb-item">
+                      <a href="/"><i class="fas fa-home"></i></a>
+                    </li>
+                    <li class="breadcrumb-item"><a href="#">Job</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">
+                      All
+                    </li>
+                  </ol>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Page content -->
+
+      <div class="container-fluid mt--6">
+        <div class="row">
+          <% for(const job of jobs) { %>
+          <div class="card w-100">
+            <div class="card-body">
+              <h4 class="card-title">
+                <%= job.role %> at <%= job.company.name %>
+              </h4>
+              <div id="details">
+                <h5>About <%= job.company.name %></h5>
+                <p class="card-text"><%= job.company.about %></p>
+                <p class="card-text">Location 🗺: <%= job.company.address %></p>
+                <h5>About the role</h5>
+                <p class="card-text">
+                  Description: <%= job.description %><br />
+                  Skills: <%- job.skills.map(skill => `<span
+                    class="badge badge-pill badge-default"
+                    >${skill}</span
+                  >`) -%><br />
+                  Compensation: <%= job.pay %><br />
+                </p>
+              </div>
+              <% if(user.isAdmin) { %>
+              <a href="/job/details/<%= job._id %>" class="btn btn-primary">Details</a>
+              <% } else { %>
+              <a href="/job/apply/<%= job._id %>" class="btn btn-primary">Apply</a>
+              <% } %>
+            </div>
+          </div>
+          <% } %>
+        </div>
+      </div>
+    </div>
+    <!--   Core JS Files   -->
+    <%- include("../shared/scripts") -%>
+  </body>
+</html>

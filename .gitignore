@@ -1,0 +1,8 @@
+node_modules/
+
+src/public/uploads/
+src/public/assets/
+
+.env
+combined.log
+error.log
