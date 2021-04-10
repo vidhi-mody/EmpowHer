@@ -26,6 +26,17 @@ export interface Post {
 }
 
 export interface PostDocument extends Post, mongoose.Document {}
+
+export interface Meet {
+  eventName: string;
+  eventDescription: string;
+  eventDate: string;
+  eventTime: string;
+  eventLink: string;
+  author: UserDocument['_id'] | UserDocument;
+}
+
+export interface MeetDocument extends Meet, mongoose.Document {}
 export interface Message {
   text: string;
   by: UserDocument['_id'] | UserDocument;
