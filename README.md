@@ -82,7 +82,7 @@ yarn install
 1. Clone the repo
 
 ```sh
-git clone https://github.com/vidhi-mody/Vihaan
+git clone https://github.com/vidhi-mody/EmpowHer
 ```
 
 2. Install the packages
@@ -121,7 +121,7 @@ yarn dev
 
 ## Roadmap
 
-See the [open issues](https://github.com/vidhi-mody/Vihaan/issues) for a list of proposed features (and known issues).
+See the [open issues](https://github.com/vidhi-mody/EmpowHer/issues) for a list of proposed features (and known issues).
 
 <!-- CONTRIBUTING -->
 
