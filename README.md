@@ -24,8 +24,8 @@ NGOs on the platform. We aim to curate a platform where women can connect, share
 [![PR's Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)](https://github.com/vidhi-mody/EmpowHer/pulls)
 ![PRs](https://img.shields.io/github/issues-pr-closed/vidhi-mody/EmpowHer?color=pink)
 [![Issues](https://img.shields.io/github/issues-raw/vidhi-mody/EmpowHer)](https://github.com/vidhi-mody/EmpowHer/issues)
-[![Contributors](https://img.shields.io/github/contributors/vidhi-mody/EmpowHer)]()
-![Languages](https://img.shields.io/github/languages/count/vidhi-mody/EmpowHer)
+[![Contributors](https://img.shields.io/github/contributors/vidhi-mody/EmpowHer?color=red)]()
+![Languages](https://img.shields.io/github/languages/count/vidhi-mody/EmpowHer?color=orange)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 <!-- TABLE OF CONTENTS -->
