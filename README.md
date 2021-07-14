@@ -137,7 +137,11 @@ Contributions are what make the open source community such an amazing place to b
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-<!-- CONTACT -->
+<!-- CODE OF CONDUCT -->
+
+## Code of Conduct
+
+Make sure to read it [here](CODE_OF_CONDUCT.md).
 
 ## Contact
 
