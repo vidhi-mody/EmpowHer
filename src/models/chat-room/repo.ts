@@ -42,7 +42,7 @@ export const findManyAndPopulate = async (
 
 export const findOrCreateOne = async (
   users: UserDocument['_id'][],
-): Promise<ChatRoomDocument> => {
+): Promise<ChatRoomDocument | null> => {
   try {
     let room = await ChatRoomModel.findOne({
       users: {
@@ -55,11 +55,11 @@ export const findOrCreateOne = async (
       },
     });
 
-    if (!room) {
-      room = await ChatRoomModel.create({
-        users,
-      });
-    }
+    // if (!room) {
+    //   room = await ChatRoomModel.create({
+    //     users,
+    //   });
+    // }
 
     return room;
   } catch (err) {

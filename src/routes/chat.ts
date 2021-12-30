@@ -50,7 +50,7 @@ router.get(
       ]);
 
       req.session.socket = {
-        room: room._id,
+        room: room?._id,
       };
 
       res.render('chat/room', {

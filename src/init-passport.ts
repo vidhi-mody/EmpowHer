@@ -28,6 +28,7 @@ const initPassport = (): void => {
         },
         async (accessToken, refreshToken, profile, done) => {
           try {
+            console.log(profile);
             const existingUser = await UserRepo.findOne({
               email: profile.email,
             });
